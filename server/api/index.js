@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
+import cors from 'cors'
 
 dotenv.config();
 const app = express(); 
-
 app.use(express.json()); // allow my server to receive json ?
 
 // api/user a plusieurs routes gérer par mon routeur express
@@ -17,7 +17,7 @@ app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal server error.'
   res.status(statusCode).json({
-    sucess: false,
+    success: false,
     statusCode,
     message
   })
