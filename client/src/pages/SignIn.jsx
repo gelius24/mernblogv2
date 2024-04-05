@@ -6,8 +6,8 @@ import { signInSuccess, signInStart, signInFailure } from "../redux/user/userSli
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const {loading: isLoading, error: errorMessage} = useSelector(state => state.user)
-  const dispatch = useDispatch()
+  const {loading: isLoading, error: errorMessage} = useSelector(state => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
