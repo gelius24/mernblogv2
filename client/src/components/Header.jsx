@@ -27,7 +27,7 @@ export default function Header() {
         <Button className="w-12 h-10 hidden sm:inline" color='gray' pill>
           <FaMoon />
         </Button>
-        <Link to={'/sign-up'}>
+        <Link to={'/sign-in'}>
           <Button gradientDuoTone='purpleToBlue' outline>SignIn</Button>
         </Link>
         <NavbarToggle />

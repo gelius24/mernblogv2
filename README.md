@@ -14,4 +14,6 @@
 2: user model (Schema) 
 3: create route folder (get,post,delete... different work with function from step 4)
 4: create controller folder
+5: signup (register) => User.save
+6: login =>  
  
