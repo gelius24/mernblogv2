@@ -9,6 +9,8 @@
 
 4: Header flowbyte (with tailwind css !)
 
+5: Google OAuth (firebase)
+
 ## B -> BACKEND PART
 1: cd ../server , npm init -y, npm i express dotenv mongoose
 2: user model (Schema) 
