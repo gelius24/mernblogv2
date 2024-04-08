@@ -4,10 +4,12 @@ import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 
 dotenv.config();
 const app = express(); 
 app.use(express.json()); // allow my server to receive json ?
+app.use(cookieParser()); // extract cookie from browser
 
 // api/user a plusieurs routes gérer par mon routeur express
 app.use("/api/user", userRouter);
