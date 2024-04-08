@@ -37,14 +37,14 @@ export const updateUser = async (req, res, next) => {
       return next(errorHandler(400, 'Password must be at least 6 characters longs'))
     }
     req.body.password = bcryptjs.hashSync(req.body.password, 10);
-
+  }
     try {
       const updatedUser = await User.findByIdAndUpdate(req.params.userId, {
         // update what is included in the request only
         $set: {
           username: req.body.username,
           email: req.body.email,
-          profilePicture: req.body.password,
+          profilePicture: req.body.profilePicture,
           password: req.body.password
         }
       }, {new: true});
@@ -53,6 +53,6 @@ export const updateUser = async (req, res, next) => {
     } catch (error) {
       next(error)
     }
-  }
+  
 }
 
