@@ -17,7 +17,7 @@ import {
   updateFailure,
   deleteUserStart,
   deleteUserFailure,
-  deleteUserSuccess,
+  deleteUserSuccess, signoutSuccess
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 
@@ -126,6 +126,19 @@ export default function DashProfile() {
     }
   };
 
+  const handleSignOut = async () => {
+    try {
+      const res = await fetch('/api/user/signout', {method: 'POST'})
+      const data = await res.json();
+      if (!res.ok)
+        console.log(data.message)
+      else
+        dispatch(signoutSuccess())
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   // change the image when we select an image file
   useEffect(() => {
     if (imageFile) uploadImage();
@@ -227,7 +240,7 @@ export default function DashProfile() {
         <span className="cursor-pointer" onClick={() => setShowModal(true)}>
           Delete Account
         </span>
-        <span className="cursor-pointer">Sign Out</span>
+        <span className="cursor-pointer" onClick={handleSignOut}>Sign Out</span>
       </div>
       <Modal
         show={showModal}

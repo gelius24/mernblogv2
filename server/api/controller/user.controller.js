@@ -8,6 +8,15 @@ export const test = (req, res) => {
   res.send('test réussi')
 }
 
+// logout
+export const signOut = (req, res, next) => {
+  try {
+    res.clearCookie('acces_token').status(200).json('User disconnected.')
+  } catch (error) {
+    next(error)
+  }
+}
+
 // delete user
 export const deleteUser = async (req, res, next) => {
   if (req.user.id !== req.params.userId) {
