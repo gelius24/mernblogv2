@@ -15,7 +15,7 @@
 1: cd ../server , npm init -y, npm i express dotenv mongoose
 2: user model (Schema) 
 3: create route folder (get,post,delete... different work with function from step 4)
-4: create controller folder
-5: signup (register) => User.save
-6: login =>  
+4: create controller folder with logic of what to do (to signup, login, logout, delete...)
+5: add admin in mongoDB (isAdmin: true) (modify User model)
+6: isAdmin is a cookie (modify the login logic... in jwt.sign method)
  
