@@ -1,6 +1,7 @@
 import Post from "../models/post.model.js";
 import { errorHandler } from "../utils/error.js";
 
+// add post to mongo db
 export const create = async (req, res, next) => {
   if (!req.user.isAdmin)
     return next(errorHandler(403, "You not allowed to create a post"));
