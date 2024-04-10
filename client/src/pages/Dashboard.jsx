@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import {useLocation} from 'react-router-dom'
 import DashSidebar from '../components/DashSidebar';
 import DashProfile from '../components/DashProfile';
+import DashPosts from '../components/DashPosts';
 
 // this page have differents tabs (for admin)
+//the content in right is dynamic depending on the tab
 export default function Dashboard() {
   const location = useLocation();
   const [tab, setTab] = useState('')
@@ -21,7 +23,9 @@ export default function Dashboard() {
         <DashSidebar />
       </div>
       {/* right side */}
-      {tab === 'profile' && <DashProfile />}
+      {tab === 'profile' && <DashProfile/>}
+      {/* posts */}
+      {tab === 'posts' && <DashPosts/>}
     </div>
   )
 }
