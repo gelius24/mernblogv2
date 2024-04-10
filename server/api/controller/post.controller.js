@@ -14,6 +14,9 @@ export const create = async (req, res, next) => {
     .join("-")
     .toLowerCase()
     .replace(/[^a-zA-Z0-9-]/g, "");
+    // matches any character that is not a lowercase letter, uppercase letter, digit, or hyphen
+    // the 'g' at the end signifies a global search, it will match all occurrences of the pattern in the string
+    //so here we erease all symbols 
   const newPost = new Post({
     ...req.body,
     slug,
