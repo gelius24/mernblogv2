@@ -50,7 +50,7 @@ export const signOut = (req, res, next) => {
 
 // delete user
 export const deleteUser = async (req, res, next) => {
-  if (req.user.id !== req.params.userId) {
+  if (req.user.id !== req.params.userId && !req.user.isAdmin) {
     return next(errorHandler(403, 'You not allowed to delete this user.'))
   }
   try {

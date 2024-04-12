@@ -14,6 +14,7 @@ export default function DashUsers() {
   const [showModal, setShowModal] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState("");
 
+  // fetch the user from the db
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -46,26 +47,25 @@ export default function DashUsers() {
     }
   };
 
-  const deleteUser = async () => {};
-  //   setShowModal(false);
-  //   try {
-  //     const res = await fetch(
-  //       `/api/user/deleteuser/${userIdToDelete}/${currentUser._id}/`,
-  //       { method: "DELETE" }
-  //     );
-  //     const data = await res.json();
-  //     if (!res.ok) {
-  //       console.log(data.message);
-  //     } else {
-  //       console.log(data)
-  //       setUserPosts(prev =>
-  //         prev.filter(post => post._id !== postIdToDelete)
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const deleteUser = async () => {
+    setShowModal(false);
+    try {
+      const res = await fetch(
+        `/api/user/delete/${userIdToDelete}/`,
+        { method: "DELETE" }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        setUsers(prev =>
+          prev.filter(user => user._id !== userIdToDeleteToDelete)
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
