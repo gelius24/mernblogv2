@@ -8,7 +8,38 @@ export const test = (req, res) => {
   res.send('test réussi')
 }
 
-// logout
+// get the users
+export const getUsers = async (req, res, next) => {
+  if (!req.user.isAdmin) return next(errorHandler(403, "You can't access users data"))
+  try {
+    const startIndex = parseInt(req.query.startIndex) || 0;
+    const limit = parseInt(req.query.limit) || 9;
+    const sortDirection = req.query.sort === 'asc' ? 1 : -1;
+
+    const users = await User.find().sort({createdAt: sortDirection}).skip(startIndex).limit(limit);
+    // remove the password from this operation
+    // ._doc is a mongoose prop who return a js object retreived from mongodb (user show more stuff)
+    const usersWithoutPassword = users.map((user) => {
+      const {password, ...rest} = user._doc;
+      return rest;
+    })
+    const totalUser = await User.countDocuments();
+    const now = new Date();
+    const oneMonthAgo = new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      now.getDate()
+    )
+    const lastMonthUsers = await User.countDocuments({
+      createdAt: {$gte: oneMonthAgo}
+    })
+    res.status(200).json({users: usersWithoutPassword, totalUser, lastMonthUsers })
+  } catch (error) {
+    next(error)
+  }
+}
+
+// logout (clear the access_token cookie)
 export const signOut = (req, res, next) => {
   try {
     res.clearCookie('acces_token').status(200).json('User disconnected.')
@@ -31,7 +62,6 @@ export const deleteUser = async (req, res, next) => {
 }
 
 // after a jwt verification, update the user info in the db.
-// the req here have a username, email and password
 export const updateUser = async (req, res, next) => {
   // cookie -> access_token: {id: User._id} et utilise process.env.JWT_SECRET
   // params = a l'id dans l'url
