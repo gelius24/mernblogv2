@@ -1,7 +1,21 @@
 import Post from "../models/post.model.js";
 import { errorHandler } from "../utils/error.js";
 
-//return the posts with or without specifications
+// Delete a post
+export const deletePost = async (req, res, next) => {
+  // check if user is an admin
+  if (!req.user.isAdmin || req.user.id !== req.params.userId)
+    return next(errorHandler(403, "You are not allowed to delete this"));
+  // db operation are put here for the code to not crash if anything bad happen
+  try {
+    await Post.findByIdAndDelete(req.params.postId)
+    res.status(200).json('post successfully deleted.')
+  } catch (error) {
+    next(error)
+  }
+};
+
+// Return one or multiple posts
 export const getPosts = async (req, res, next) => {
   try {
     const startIndex = parseInt(req.query.startIndex) || 0;
@@ -23,18 +37,22 @@ export const getPosts = async (req, res, next) => {
       .skip(startIndex)
       .limit(limit);
 
-    const totalPosts = await Post.countDocuments()
+    const totalPosts = await Post.countDocuments();
     const now = new Date();
     const oneMonthAgo = new Date(
       now.getFullYear(),
       now.getMonth() - 1,
       now.getDate()
-    )
-    const lastMonthPosts = await Post.countDocuments({createdAt: {$gte: oneMonthAgo}})
+    );
+    const lastMonthPosts = await Post.countDocuments({
+      createdAt: { $gte: oneMonthAgo },
+    });
 
     res.status(200).json({
-      posts, totalPosts, lastMonthPosts
-    })
+      posts,
+      totalPosts,
+      lastMonthPosts,
+    });
   } catch (error) {
     next(error);
   }
