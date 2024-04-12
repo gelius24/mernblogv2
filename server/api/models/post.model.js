@@ -16,7 +16,7 @@ const postSchema = new Schema({
   },
   image: {
     type: String,
-    default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyAZ0PJnNnC29xhrPi_uVSjcG5XbMmPiolIQ&s'
+    default: 'https://contenthub-static.grammarly.com/blog/wp-content/uploads/2017/11/how-to-write-a-blog-post.jpeg'
   },
   category: {
     type: String,
