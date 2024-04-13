@@ -10,7 +10,7 @@ export default function CommentSection({ postId }) {
   const [commentError, setCommentError] = useState(null);
   const [comments, setComments] = useState([]);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const getComments = async () => {
       try {
@@ -43,7 +43,7 @@ export default function CommentSection({ postId }) {
       if (res.ok) {
         setComment("");
         setCommentError(null);
-        setComments([data, ...comments])
+        setComments([data, ...comments]);
       }
     } catch (error) {
       setCommentError(error.message);
@@ -52,23 +52,37 @@ export default function CommentSection({ postId }) {
 
   const handleLike = async (commentId) => {
     try {
-      if (!currentUser) return navigate('/sign-in')
-      const res = await fetch(`/api/comment/likeComment/${commentId}`, 
-      {method: 'PUT'})
+      if (!currentUser) return navigate("/sign-in");
+      const res = await fetch(`/api/comment/likeComment/${commentId}`, {
+        method: "PUT",
+      });
       if (res.ok) {
         const data = await res.json();
-        setComments(comments.map((comment) => 
-          comment._id === commentId ? {
-            ...comment,
-            likes: data.likes,
-            numberOfLikes: data.numberOfLikes
-          } : comment
-        ))
+        setComments(
+          comments.map((comment) =>
+            comment._id === commentId
+              ? {
+                  ...comment,
+                  likes: data.likes,
+                  numberOfLikes: data.numberOfLikes,
+                }
+              : comment
+          )
+        );
       }
     } catch (error) {
-      
+      console.log(error);
     }
-  }
+  };
+
+  const handleEdit = async (comment, editedContent) => {
+    setComments(
+      comments.map((c) => {
+        return c._id === comment._id ? { ...c, content: editedContent } : c
+      }
+      )
+    );
+  };
 
   return (
     <div className="max-w-2xl mx-auto w-full p-3">
@@ -132,8 +146,15 @@ export default function CommentSection({ postId }) {
               <p>{comments.length}</p>
             </div>
           </div>
-          {comments.map(comment => {
-            return <Comment key={comment._id} comment={comment} onLike={handleLike}/>
+          {comments.map((comment) => {
+            return (
+              <Comment
+                key={comment._id}
+                comment={comment}
+                onLike={handleLike}
+                onEdit={handleEdit}
+              />
+            );
           })}
         </>
       )}

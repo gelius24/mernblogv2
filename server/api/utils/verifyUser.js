@@ -8,7 +8,7 @@ export const verifyToken = (req,res,next) => {
     if (err) return next(errorHandler(401, 'Unauthorized (the token didnt pass the test !).'))
     // the token is correct add user to the request
     req.user = user
-    // next function here updateUser
+    // next function here updateUser for example
     next();
 })
 }
