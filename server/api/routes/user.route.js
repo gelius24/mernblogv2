@@ -1,5 +1,5 @@
 import express from 'express'
-import { test, updateUser, deleteUser, signOut, getUsers } from '../controller/user.controller.js';
+import { test, updateUser, deleteUser, signOut, getUsers, getUser } from '../controller/user.controller.js';
 import { verifyToken } from '../utils/verifyUser.js';
 
 // this file handle what happens in the route /api/user/ 
@@ -10,5 +10,6 @@ router.put('/update/:userId', verifyToken, updateUser)
 router.delete('/delete/:userId', verifyToken, deleteUser)
 router.post('/signout', signOut)
 router.get('/getusers', verifyToken, getUsers)
+router.get('/:userId', getUser)
 
 export default router;
