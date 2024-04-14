@@ -74,7 +74,7 @@ export default function Search() {
       const res = await fetch(`/api/post/getposts?${urlParams.toString()}`);
       const data = await res.json();
       setPosts([...posts, ...data.posts]);
-      if (data.posts.length >= 9) setShowMore(true);
+      if (data.posts.length >= 10) setShowMore(true);
       else setShowMore(false);
     } catch (error) {
       console.log(error)
@@ -110,9 +110,9 @@ export default function Search() {
       </div>
       <div className="w-full">
         <h1 className="text-3xl font-semibold sm:border-b border-gray-500 p-3 mt-5">Posts found:</h1>
-        <div className="p-7 flex flex-wrap gap-4">
+        <div className="p-7 flex flex-wrap gap-4 ml-48">
           {
-            !isLoading && posts.length === 0 && <p className="text-xl text-gray-500">No posts found</p>
+            !isLoading && posts.length === 10 && <p className="text-xl text-gray-500">No posts found</p>
           }
           {
             isLoading && <p className="text-xl text-gray-500">Loading...</p>

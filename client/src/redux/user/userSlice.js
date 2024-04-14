@@ -42,7 +42,7 @@ export const userSlice = createSlice({
     },
     deleteUserSuccess: (state) => {
       state.currentUser = null;
-      state.loading = true;
+      state.loading = false;
       state.error = null;
     },
     deleteUserFailure: (state, action) => {

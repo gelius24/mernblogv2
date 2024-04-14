@@ -41,16 +41,16 @@ export default function PostPage() {
       try {
         const res = await fetch(`/api/post/getposts?limit=3`)
         const data = await res.json();
+        console.log(data)
         if (res.ok) {
           setRecentsPosts(data.posts)
-          
         }
       } catch (error) {
         console.log(error.message)
       }
     }
     fetchRecentPosts();
-  }, [])
+  }, [post])
 
   if (isLoading) return <div className="flex justify-center items-center min-h-screen"><Spinner size='xl' /></div>
 
@@ -60,7 +60,7 @@ export default function PostPage() {
       <Link to={`/search?category=${post && post.category}`} className="self-center mt-5">
         <Button pill color='gray' size='xs'>{post && post.category}</Button>
       </Link>
-      <img src={post && post.image} alt={post && post.title} className="mt-10 p-3 max-h-[600]w-full object-cover" />
+      <img src={post && post.image} alt={post && post.title} className="mt-10 p-3 max-h-[400px] w-full object-cover" />
       <div className="flex justify-between p-3 border-b border-slate-500 mx-auto w-full max-w-2xl text-xs">
         <span>{post && new Date(post.createdAt).toLocaleDateString()}</span>
         <span className="italic">{post && (post.content.length / 1000).toFixed(0)}, min. read</span>
