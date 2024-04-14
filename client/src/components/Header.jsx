@@ -46,7 +46,7 @@ export default function Header() {
     <Navbar className="border-b-2">
       <Link
         to={"/"}
-        className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
+        className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white border border-black dark:border-white p-1 rounded-md"
       >
         Woody's Blog
       </Link>
