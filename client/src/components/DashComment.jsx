@@ -13,7 +13,7 @@ export default function DashComment() {
   const [showModal, setShowModal] = useState(false);
   const [commentIdToDelete, setCommentIdToDelete] = useState("");
 
-  // fetch the user from the db
+  // fetch the comments from the db
   useEffect(() => {
     const fetchComments = async () => {
       try {

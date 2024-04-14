@@ -5,6 +5,7 @@ import DashProfile from "../components/DashProfile";
 import DashPosts from "../components/DashPosts";
 import DashUsers from "../components/DashUsers";
 import DashComments from "../components/DashComment";
+import DashboardComp from '../components/DashboardComp';
 
 // this page have differents tabs (for admin)
 //the content in right is dynamic depending on the tab
@@ -32,6 +33,8 @@ export default function Dashboard() {
       {(tab === "users") && <DashUsers />}
       {/* comments */}
       {(tab === "comments") && <DashComments />}
+      {/* dashboard comp*/}
+      {(tab === "dashboard") && <DashboardComp />}
     </div>
   );
 }

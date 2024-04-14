@@ -26,7 +26,7 @@ export default function DashUsers() {
             setShowMore(false);
           }
         }
-      } catch (error) {}
+      } catch (error) {console.log(error)}
     };
     if (currentUser.isAdmin) fetchUsers();
   }, []);
