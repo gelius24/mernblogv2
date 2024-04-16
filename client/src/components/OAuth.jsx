@@ -10,6 +10,7 @@ export default function OAuth() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  // sign in with google using firebase OAuth functionality
   const handleGoogleClick = async () => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider()
@@ -18,6 +19,7 @@ export default function OAuth() {
     // open the popup window
     try {
       const resultsFromGoogle = await signInWithPopup(auth, provider)
+      // post request to my backend to create a user in mongoDB
       const res = await fetch('/api/auth/google', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

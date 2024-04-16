@@ -19,7 +19,7 @@ export const signup = async (req, res, next) => {
 
   // secure the password
   const hashedPassword = bcryptjs.hashSync(password, 10);
-
+  // the mongoose schema manage duplicate username and email.
   const newUser = new User({ username, email, password: hashedPassword });
 
   try {
@@ -31,6 +31,7 @@ export const signup = async (req, res, next) => {
 };
 
 // login process. check if user exixst in db, use JWT for auth
+// send a token in the request
 export const signin = async (req, res, next) => {
   const {email, password} = req.body;
 
@@ -44,6 +45,7 @@ export const signin = async (req, res, next) => {
       return next(errorHandler(404, 'email not found'))
 
     // comparason between not hashed and hashed password
+    // if its true we got a validUser ()
     const validPassword = bcryptjs.compareSync(password, validUser.password);
     // remove the hashed code from to validUser object
     const {password: pass, ...rest} = validUser._doc;

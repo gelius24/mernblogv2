@@ -4,7 +4,7 @@ import themeReducer from './theme/themeSlice'
 import {persistReducer, persistStore} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-// usage of multiple reducers
+// usage of multiple reducers. here I manage user and theme state.
 const rootReducer = combineReducers({
   user: userReducer,
   theme: themeReducer,
